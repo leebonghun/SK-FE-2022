@@ -112,7 +112,7 @@ class RandomCountUp extends Component {
   // 컴포넌트가 언마운트 되기 직전에 수행
   componentWillUnmount() {
     console.log('컴포넌트가 언마운트 되기 직전에 수행');
-    // 구독, 취소
+    // 구독, 취소hsl(196, 85%, 63%)
     // jQuery 플러그인 연결
     // 연결된 플러그인 -> DOM 노드에 연결
     // 페이지 전환 -> DOM 노드는 문서에서 존재하지 않음
