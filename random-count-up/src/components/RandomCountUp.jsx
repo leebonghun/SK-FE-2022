@@ -13,32 +13,55 @@ class RandomCountUp extends Component {
 
     // 컴포넌트 상태 선언
     this.state = {
-      count: 0,
-      step: 1,
+      count: props.count ?? 0,
+      step: props.step ?? 1,
       target: getRandomMinMax(40, 80),
     };
+
+    // 클래스 컴포넌트의 인스턴스 메서드의 this 다시 연결(bind)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   // 라이프 사이클 메서드 [2]
   // 컴포넌트가 생성될 때, 업데이트 할 때 모두 실행
   // props에 의해 파생된(derived) 상태 값 믹스인(합성)
-  static getDerivedStateFromProps(props, state) {
-    const { count, step } = props;
-    const { target } = state;
-    const isComplete = count >= target;
-
+  static getDerivedStateFromProps(props, { count, target }) {
     return {
-      count,
-      step,
-      isComplete,
+      isComplete: count >= target,
     };
   }
 
+  handleClick() {
+    // ※ React 컴포넌트 상태 업데이트에 대해
+    // immutable
+    // mutation
+    // this.state.count = this.state.count + this.state.step;
+
+    // this.state.count = 0
+
+    const { count, step } = this.state;
+
+    console.log('setState() 이전: ', count);
+
+    this.setState(
+      {
+        count: count + step,
+      },
+      () => console.log('setState() callback: ', this.state.count)
+    );
+
+    console.log('setState() 이후: ', this.state.count);
+  }
+
   render() {
-    console.log(this.state);
+    const { count, isComplete } = this.state;
+
     return (
       <div className="random-count-up">
-        <output style={this.state.isComplete ? completedStyle : null}>0</output>
+        <button type="button" onClick={this.handleClick}>
+          increment count
+        </button>
+        <output style={isComplete ? completedStyle : null}>{count}</output>
       </div>
     );
   }

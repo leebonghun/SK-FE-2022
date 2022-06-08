@@ -10,6 +10,6 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <RandomCountUp count={0} step={1} />
+    <RandomCountUp count={0} step={10} />
   </React.StrictMode>
 );
