@@ -33,31 +33,10 @@ class RandomCountUp extends Component {
     };
   }
 
-  handleClick() {
-    // setState() 방법 1: 객체 합성
-    // const { count, step } = this.state;
-    // this.setState({
-    //   count: count + step,
-    // });
-
-    // setState() 방법 2: 콜백 활용
-    /* 이전 상태 { count, step, target, isComplete } */
-    // 업데이트 상태 반환
-    this.setState(({ count, step }) => ({
-      count: count + step,
-    }));
-  }
-
   // 라이프 사이클 메서드 [6]
   // 컴포넌트의 렌더링 유무를 제어할 때 사용
   // 오직 성능 최적화 목적으로 사용
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.isComplete) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // shouldComponentUpdate
 
   // 라이프 사이클 메서드 [3]
   // 컴포넌트가 생성될 때, 업데이트 할 때 모두 실행
@@ -75,47 +54,43 @@ class RandomCountUp extends Component {
   }
 
   // 라이프 사이클 메서드 [7]
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    // UI 비교
-    return {
-      distanceY: 20,
-    }; // {}, [], ...
-  }
+  // getSnapshotBeforeUpdate
 
   // 라이프 사이클 메서드 [4]
   // 컴포넌트가 실제 DOM에 마운트 된 이후, 1회 실행(콜백)
   componentDidMount() {
     document.title = `(${this.state.target}) ${DOCUMENT_TITLE}`;
-    // console.log('component did mount');
   }
 
   // 라이프 사이클 메서드 [5]
   // 컴포넌트가 업데이트(re-render) 될 때 마다 실행
   // 업데이트 내용이 DOM에 패치(patch)될 때 마다
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('이전 count 상태', prevState.count);
-    // console.log('현재 count 상태', this.state.count);
-    // console.log('component did update');
-
     const { target, isComplete } = this.state;
-
-    if (isComplete) {
-      console.log('completed');
-      // 목표 값으로 상태 업데이트
-      // this.setState({
-      //   count: target,
-      // });
-    }
   }
 
   // 라이프 사이클 메서드 [8]
   // 컴포넌트가 언마운트 되기 직전에 수행
-  componentWillUnmount() {
-    console.log('컴포넌트가 언마운트 되기 직전에 수행');
-    // 구독, 취소hsl(196, 85%, 63%)
-    // jQuery 플러그인 연결
-    // 연결된 플러그인 -> DOM 노드에 연결
-    // 페이지 전환 -> DOM 노드는 문서에서 존재하지 않음
+  // componentWillUnmount
+
+  // 이벤트 핸들러
+  // 클래스 컴포넌트의 인스턴스 메서드
+  handleClick() {
+    this.setState(
+      ({ count, step }) => ({
+        count: count + step,
+      }),
+      () => {
+        // console.log('컴포넌트 상태 업데이트가 보장 됨');
+        const { isComplete, target } = this.state;
+
+        if (isComplete) {
+          this.setState({
+            count: target,
+          });
+        }
+      }
+    );
   }
 }
 
