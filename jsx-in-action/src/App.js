@@ -7,32 +7,64 @@ import { EmojiOops, PrettyPrintCode } from 'components';
 let error = null;
 
 // 오류 메시지를 포함한 객체를 추가해보세요.
+error = {
+  message: 'React 앱을 렌더링하는데 실패했습니다.',
+  log() {
+    console.error(this.message);
+  },
+};
 
 /* -------------------------------------------------------------------------- */
 
-const ConditionalRendering = () => {
-  if (error === null || error === undefined) {
-    console.log('현재 앱에는 오류(error)가 발생하지 않았습니다.');
-  }
+export const ConditionalRendering = () => {
+  // if (error === null || error === undefined) {
+  //   console.log('현재 앱에는 오류(error)가 발생하지 않았습니다.');
+  // }
 
-  error && typeof error.log === 'function' && error.log();
+  // null 병합 연산자 활용
+  error ?? console.log('현재 앱에는 오류(error)가 발생하지 않았습니다.');
+
+  // if (error) {
+  //   if (typeof error.log === 'function') {
+  //     error.log();
+  //   }
+  // }
+
+  // error && typeof error.log === 'function' && error.log();
+
+  error?.log?.();
 
   // JSX 조건부 렌더링: if 문
   // 오류가 존재하면 렌더링 되도록 코드를 작성합니다.
-  const displayErrorState = (
-    <div className="container">
-      <h1 className="headline">
-        <EmojiOops height={200} />
-        {/* 오류 메시지가 출력되도록 코드를 변경합니다. */}
-        {error}
-      </h1>
-    </div>
-  );
+  // if (error) {
+  //   const displayErrorState = (
+  //     <div className="container">
+  //       <h1 className="headline">
+  //         {/* 오류 메시지가 출력되도록 코드를 변경합니다. */}
+  //         <EmojiOops height={200} />
+  //         {error?.message}
+  //       </h1>
+  //     </div>
+  //   );
 
+  //   return displayErrorState;
+  // }
+
+  // JSX ({ expression })
   return (
     <div className="container">
-      <h1 className="headline">React 조건부 렌더링</h1>
-      <p>오류가 존재하면 렌더링 되도록 코드를 작성합니다.</p>
+      <h1 className="headline">
+        {!error ? (
+          'React 조건부 렌더링'
+        ) : (
+          <>
+            <EmojiOops height={200} />
+            {error.message}
+          </>
+        )}
+      </h1>
+      {/* {!error ? <p>오류가 존재하면 렌더링 되도록 코드를 작성합니다.</p> : null} */}
+      {!error && <p>오류가 존재하면 렌더링 되도록 코드를 작성합니다.</p>}
     </div>
   );
 };
@@ -42,7 +74,7 @@ const ConditionalRendering = () => {
 // `api/db.json` 데이터에서 `navigation.items` 데이터를 화면에 출력해보세요.
 // `list` 매개 변수를 순환해 아이템 리스트를 반환하는 `renderList` 함수를 만들어 활용해봅니다.
 
-const ListRedering = () => {
+export const ListRedering = () => {
   return (
     <div className="container">
       <h1 className="headline">React 리스트 렌더링 (배열)</h1>
@@ -71,4 +103,4 @@ const ListRedering = () => {
 
 /* -------------------------------------------------------------------------- */
 
-export { ConditionalRendering };
+// export { ConditionalRendering };
