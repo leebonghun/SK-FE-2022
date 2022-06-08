@@ -53,8 +53,6 @@ class RandomCountUp extends Component {
     console.log('setState() 이후: ', this.state.count);
   }
 
-  //라이프 사이클 메서드 [3]
-  //컴포넌트가 생성될 때, 업데이트 할 때 모두 실행
   render() {
     const { count, isComplete } = this.state;
 
