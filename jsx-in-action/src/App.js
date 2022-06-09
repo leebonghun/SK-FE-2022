@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 
-// import { createElement } from 'react';
-import { EmojiOops, PrettyPrintCode } from 'components';
 // import db from 'api/db.json';
+// import { createElement } from 'react';
+import { Fragment } from 'react';
+import { EmojiOops, PrettyPrintCode } from 'components';
+import { isObject, isArray, isString, typeIs } from 'utils';
 
 /* -------------------------------------------------------------------------- */
 
@@ -105,7 +107,6 @@ export const ListRedering = () => {
   // React 훅 (함수형 컴포넌트 내부)
   // 사이드 이펙트
   // 데이터 요청 → 데이터 패치
-
   return (
     <div className="container">
       <h1 className="headline">React 리스트 렌더링 (배열)</h1>
@@ -127,12 +128,22 @@ export const ListRedering = () => {
 
       {/* 객체 리스트 렌더링 */}
       <dl className="descriptionList">
+        {Object.entries(db).map(([key, value]) => {
+          return (
+            <Fragment key={key}>
+              <dt>{key}</dt>
+              <dd>
+                {isString(value) ? value : <PrettyPrintCode code={value} />}
+              </dd>
+            </Fragment>
+          );
+        })}
         {/* 웹 표준을 준수해 설명 목록을 화면에 출력해봅니다. */}
         {/* `db` 객체의 "속성", "값" 쌍을 순환하여 리스트 렌더링 해보세요. */}
         {/* 값의 유형이 객체 또는 배열인 경우, 코드가 화면에 출력되도록 설정합니다. */}
         {/* `isArray`, `isObject` 유틸리티 함수를 만들어 활용하세요. */}
         {/* 코드를 화면에 출력할 때는 <PrettyPrintCode /> 컴포넌트를 활용합니다. (`code` 속성) */}
-        <PrettyPrintCode />
+        {/* <PrettyPrintCode code={db} /> */}
       </dl>
     </div>
   );
