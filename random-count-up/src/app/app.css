@@ -1,0 +1,15 @@
+.reloadButton {
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  padding: 0.42em 0.98em;
+}
+
+.reloadButton:hover {
+  background: #333;
+}

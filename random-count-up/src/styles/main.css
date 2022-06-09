@@ -1,7 +1,7 @@
 @import url('./common/initializer.css');
 
 body {
-  cursor: pointer;
+  /* cursor: pointer; */
   display: flex;
   justify-content: center;
   align-items: center;
