@@ -8,28 +8,20 @@ const completedStyle = {
 };
 
 class RandomCountUp extends Component {
-  // 라이프 사이클 메서드 [1]
-  // 컴포넌트가 생성될 때 1회 실행
-  constructor(props) {
-    super(props);
-
-    // 컴포넌트 상태 선언
-    this.state = {
-      count: props.count ?? 0,
-      step: props.step ?? 1,
-      target: getRandomMinMax(40, 80),
-    };
-
-    // 클래스 컴포넌트의 인스턴스 메서드의 this 다시 연결(bind)
-    this.handleClick = this.handleClick.bind(this);
-  }
+  // 클래스 필드 (class field)
+  state = {
+    count: this.props.count ?? 0,
+    step: this.props.step ?? 1,
+    target: getRandomMinMax(this.props.min ?? 0, this.props.max ?? 100),
+  };
 
   // 라이프 사이클 메서드 [2]
   // 컴포넌트가 생성될 때, 업데이트 할 때 모두 실행
   // props에 의해 파생된(derived) 상태 값 믹스인(합성)
-  static getDerivedStateFromProps(props, { count, target }) {
+  static getDerivedStateFromProps({ fps }, { count, target }) {
     return {
       isComplete: count >= target,
+      FPS: 1000 / (fps ?? 60),
     };
   }
 
@@ -45,9 +37,6 @@ class RandomCountUp extends Component {
 
     return (
       <div className="random-count-up">
-        <button type="button" onClick={this.handleClick}>
-          increment count
-        </button>
         <output style={isComplete ? completedStyle : null}>{count}</output>
       </div>
     );
@@ -56,10 +45,33 @@ class RandomCountUp extends Component {
   // 라이프 사이클 메서드 [7]
   // getSnapshotBeforeUpdate
 
+  // 클래스 필드 (class field)
+  // clearTimeoutId = 0;
+
+  countUp() {
+    let clearTimeoutId = setTimeout(() => {
+      this.setState(
+        ({ count, step }) => ({
+          count: count + step,
+        }),
+        () => {
+          const { isComplete, target } = this.state;
+          if (isComplete) {
+            this.setState({
+              count: target,
+            });
+            clearTimeout(clearTimeoutId);
+          }
+        }
+      );
+    }, this.state.FPS);
+  }
+
   // 라이프 사이클 메서드 [4]
   // 컴포넌트가 실제 DOM에 마운트 된 이후, 1회 실행(콜백)
   componentDidMount() {
     document.title = `(${this.state.target}) ${DOCUMENT_TITLE}`;
+    this.countUp();
   }
 
   // 라이프 사이클 메서드 [5]
@@ -67,31 +79,12 @@ class RandomCountUp extends Component {
   // 업데이트 내용이 DOM에 패치(patch)될 때 마다
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { target, isComplete } = this.state;
+    this.countUp();
   }
 
   // 라이프 사이클 메서드 [8]
   // 컴포넌트가 언마운트 되기 직전에 수행
   // componentWillUnmount
-
-  // 이벤트 핸들러
-  // 클래스 컴포넌트의 인스턴스 메서드
-  handleClick() {
-    this.setState(
-      ({ count, step }) => ({
-        count: count + step,
-      }),
-      () => {
-        // console.log('컴포넌트 상태 업데이트가 보장 됨');
-        const { isComplete, target } = this.state;
-
-        if (isComplete) {
-          this.setState({
-            count: target,
-          });
-        }
-      }
-    );
-  }
 }
 
 export default RandomCountUp;
