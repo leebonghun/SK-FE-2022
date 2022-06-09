@@ -1,4 +1,4 @@
-import { Emoji, A11yHidden } from 'components';
+import { Emoji, StyledA11yHidden } from 'components';
 
 export default function App() {
   return (
@@ -6,9 +6,9 @@ export default function App() {
       <h1>Banner 컴포넌트가 이 곳에 위치해야 합니다.</h1>
       <Emoji image="react-atom.png" label="React Atom" />
 
-      <A11yHidden tag="button" focusable>
+      <StyledA11yHidden as="a" href="https://euid.dev" $focusable $external>
         Banner Content
-      </A11yHidden>
+      </StyledA11yHidden>
     </div>
   );
 }

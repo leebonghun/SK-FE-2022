@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 // React Styled Component
-export const StyledA11yHidden = styled.span`
-  overflow: ${(props) => {
-    return !props.focusable ? 'auto' : 'hidden';
+export const StyledA11yHidden = styled.span.attrs(({ $external }) => {
+  return {
+    target: $external ? '_blank' : null,
+    rel: $external ? 'noopener noreferrer' : null,
+  };
+})`
+  overflow: ${({ $focusable }) => {
+    return $focusable ? 'auto' : 'hidden';
   }};
   position: absolute;
   clip: rect(0, 0, 0, 0);
