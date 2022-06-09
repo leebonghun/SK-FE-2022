@@ -3,6 +3,24 @@ import { A11yHidden } from './a11yHidden';
 const metaConfig = {
   title: 'atomics/A11yHidden',
   component: A11yHidden,
+  argTypes: {
+    top: {
+      control: {
+        type: 'range',
+        min: 10,
+        step: 10,
+        max: 200,
+      },
+    },
+    right: {
+      control: {
+        type: 'range',
+        min: 10,
+        step: 10,
+        max: 200,
+      },
+    },
+  },
 };
 
 export default metaConfig;
@@ -17,13 +35,39 @@ const Template = (args) => (
 );
 
 // 스토리 마다 템플릿 복사 (베리에이션)
-export const Hidden = Template.bind({});
-Hidden.args = {
+export const Base = Template.bind({});
+Base.args = {
   children: 'Storybook을 활용한 CDD',
 };
 
-export const Visible = Template.bind({});
-Visible.args = {
-  hidden: false,
-  children: 'Storybook을 활용한 CDD',
+export const FocusableLink = Template.bind({});
+FocusableLink.args = {
+  ...Base.args,
+  tag: 'a',
+  href: 'https://google.co.kr',
+  children: 'Google',
+  focusable: true,
+};
+
+export const FocusableExternalLink = Template.bind({});
+FocusableExternalLink.args = {
+  ...FocusableLink.args,
+  external: true,
+};
+
+export const Layout = Template.bind({});
+Layout.args = {
+  ...FocusableLink.args,
+  className: 'layout--fixed',
+  top: 30,
+  right: 40,
+};
+
+export const ExtendLayout = Template.bind({});
+ExtendLayout.args = {
+  ...Layout.args,
+  style: {
+    color: 'darkred',
+    textDecoration: 'none',
+  },
 };
