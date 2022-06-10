@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Parent from './Parent';
 
 import { ThemeContext, themeConfig } from './contexts/theme';
@@ -17,6 +16,10 @@ function App() {
     return storageItemTheme;
   });
 
+  useEffect(() => {
+    console.log(lazyState);
+  }, [lazyState]);
+
   // 복합적인 상태인 경우 useState() 훅을 사용한다면 개별적으로 상태를 관리해야 한다.
 
   // { loading, error, data }
@@ -25,13 +28,35 @@ function App() {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
+  // Promise
+  // useEffect(() => {
+  //   fetch('https://jsonplaceholder.typicode.com/todos/1')
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json))
+  //     .catch((error) => setError(error))
+  //     .finally(() => setLoading(false));
+  // }, []);
+
+  // Async Function
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/todos/1'
+        );
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, []);
+
+  console.log(loading, error, data);
 
   // class : this.setState(newState[, callback])
 
@@ -44,7 +69,7 @@ function App() {
 
   // 테마 상태가 변경되면? 사용자에게 알림 메시지를 표시합니다. (side effect)
 
-  useEffect(
+  useLayoutEffect(
     /* 이펙트 함수(콜백) */
     () => {
       // console.log('effect function callback');
