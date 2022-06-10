@@ -19,7 +19,13 @@ function App() {
         theme: themeConfig[themeName],
       }}
     >
-      <div className="App">
+      <div
+        className="App"
+        style={{
+          minHeight: '100vh',
+          background: themeConfig[themeName].background,
+        }}
+      >
         <Parent />
       </div>
     </ThemeContext.Provider>
