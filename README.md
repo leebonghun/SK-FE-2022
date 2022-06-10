@@ -1,5 +1,6 @@
 ###### SK 동반성장 BP사 대상 “React & Vue" 교육
 
+<<<<<<< HEAD
 # 프리페어레이션
 
 학습에 앞서 준비해야 할 사항을 안내합니다. (참고: [yamoo9's Preparing for Class](https://yamoo9.github.io/preparing-for-class/))
@@ -88,3 +89,6 @@ Windows 10 사용자인 경우, [WSL](https://docs.microsoft.com/ko-kr/windows/w
 ---
 
 <small>COPYRIGHT ALL RESERVED. 2022 @ EUID</small>
+=======
+# 학습 주제
+>>>>>>> upstream/react/ie11
