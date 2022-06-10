@@ -2,7 +2,15 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,osx,node,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,osx,node,visualstudiocode
 
-manual-config-react-app-dev
+
+manual-config-react-app-dev/*
+backup/*
+jsx-in-action/*
+render-react-browser/*
+random-count-up/*
+manual-react-dev/*
+RESET_GIT_BRANCHES/*
+
 
 ### Node ###
 # Logs

@@ -1,0 +1,87 @@
+{
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "classnames": "2.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-refresh": "0.13.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "defaults",
+      "not dead",
+      "> 1% in KR"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "6.5.8",
+    "@storybook/addon-essentials": "6.5.8",
+    "@storybook/addon-interactions": "6.5.8",
+    "@storybook/addon-links": "6.5.8",
+    "@storybook/builder-webpack4": "6.5.8",
+    "@storybook/builder-webpack5": "6.5.8",
+    "@storybook/manager-webpack4": "6.5.8",
+    "@storybook/manager-webpack5": "6.5.8",
+    "@storybook/node-logger": "6.5.8",
+    "@storybook/preset-create-react-app": "4.1.2",
+    "@storybook/react": "6.5.8",
+    "@storybook/testing-library": "0.0.11",
+    "babel-plugin-named-exports-order": "0.0.2",
+    "prop-types": "15.8.1",
+    "webpack": "5.73.0"
+  },
+  "overrides": {
+    "react-refresh": "0.13.0"
+  }
+}

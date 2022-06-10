@@ -1,0 +1,10 @@
+{
+  "typeAcquisition": {
+    "exclude": []
+  },
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src/*"],
+  "exclude": ["node_modules", "build"]
+}
